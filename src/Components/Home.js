@@ -8,7 +8,6 @@ import * as apiDataActions from '../Services/Actions/actions'
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/table/lib/css/table.css";
 import DailogBox from './DailogBox';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const [openmodel, SetModel] = useState(false);
@@ -23,7 +22,7 @@ export default function Home() {
     ];
 
     const { userData, loading, error, message } = useSelector((state) => state.Data);
-    console.log("userData", userData.data);
+    // console.log("userData", userData.data);
     const dispatch = useDispatch();
     const { fatchData, deleteData, addData, updateData } = bindActionCreators(apiDataActions, dispatch);
     useEffect(() => {
@@ -45,10 +44,6 @@ export default function Home() {
     }
 
     useEffect(() => {
-        // toast.promise(fatchData, {
-        //     success: 'Data Is Fatched',
-        //     error: message
-        // })
     }, [loading])
 
     const renderCell = (key) => (rowIndex) => {
@@ -62,11 +57,11 @@ export default function Home() {
     }
     return (
         <div>
-            {loading ? <div>Loading</div> : ""}
+            {loading ? <div></div> : ""}
             {error ? <div>error {message}</div> : ""}
 
             <div>
-                <button onClick={() => SetModel(true)}>ADD</button>
+                <button className="bp4-button bp4-intent-success" onClick={() => SetModel(true)}>ADD</button>
             </div>
             <Table2 columnWidths={column.map(({ width }) => width)} numRows={userData.data.length}>
                 {column.map(({ field, headerName }, i) => <Column key={i} name={headerName} cellRenderer={renderCell(field)} className="column" />)}

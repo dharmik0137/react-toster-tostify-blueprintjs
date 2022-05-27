@@ -9,24 +9,17 @@ export const fatchData = () => {
         try {
 
             dispatch({ type: types.SET_LOADING_TRUE })
-            const resolveAfter3Sec = new Promise(viewData => setTimeout(viewData, 600));
-            toast.promise(
-                resolveAfter3Sec,
-                {
-                    pending: 'LOADING...',
-                    success: 'DATA RECIVED...👌',
-                    error: 'THERE IS AN ERROR... 🤯'
-                }
-            )
-            const viewData = await axios.get("http://localhost:5000/users");
-            // toast.success("Data Is Fatched")
-            console.log("view", viewData);
+            const viewData = await toast.promise(axios.get("http://localhost:5000/users"), {
+                pending: 'LOADING.....',
+                success: 'SUCCESS....',
+                error: 'ERROR...'
+            }
+            );
             dispatch({ type: types.SET_LOADING_FALSE })
             dispatch({
                 type: types.GET_DATA,
                 data: viewData.data
             })
-
         }
         catch (error) {
             dispatch({
@@ -41,7 +34,12 @@ export const deleteData = (id) => {
     return async (dispatch) => {
         try {
             dispatch({ type: types.SET_LOADING_TRUE })
-            const viewData = await axios.delete(`http://localhost:5000/users/${id}`);
+            const viewData = await toast.promise(axios.delete(`http://localhost:5000/users/${id}`), {
+                pending: 'LOADING.....',
+                success: 'SUCCESS....',
+                error: 'ERROR...'
+            }
+            );
             console.log("view Data", viewData);
             dispatch({ type: types.SET_LOADING_FALSE })
             dispatch(fatchData());
@@ -59,7 +57,12 @@ export const addData = (user) => {
     return async (dispatch) => {
         try {
             dispatch({ type: types.SET_LOADING_TRUE })
-            const viewData = await axios.post(`http://localhost:5000/users/`, user);
+            const viewData = await toast.promise(axios.post(`http://localhost:5000/users/`, user), {
+                pending: 'LOADING.....',
+                success: 'SUCCESS....',
+                error: 'ERROR...'
+            }
+            );
             console.log("view Data", viewData);
             dispatch({ type: types.SET_LOADING_FALSE })
             dispatch(fatchData());
@@ -79,7 +82,12 @@ export const updateData = (user) => {
     return async (dispatch) => {
         try {
             dispatch({ type: types.SET_LOADING_TRUE })
-            const viewData = await axios.put(`http://localhost:5000/users/${user.id}`, user);
+            const viewData = await toast.promise(axios.put(`http://localhost:5000/users/${user.id}`, user), {
+                pending: 'LOADING.....',
+                success: 'SUCCESS....',
+                error: 'ERROR...'
+            }
+            );
             console.log("view Data", viewData);
             dispatch({ type: types.SET_LOADING_FALSE })
             dispatch(fatchData());

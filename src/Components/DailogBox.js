@@ -2,7 +2,6 @@ import { Dialog, FormGroup, InputGroup } from '@blueprintjs/core'
 import { hide } from '@blueprintjs/core/lib/esm/components/context-menu/contextMenu';
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function DailogBox({ openmodel, closeModel, onSubmit, edit, onDataSubmit }) {
@@ -13,7 +12,7 @@ export default function DailogBox({ openmodel, closeModel, onSubmit, edit, onDat
         if (edit) setAddData(edit)
     }, [edit])
 
-    console.log("Dailog");
+    // console.log("Dailog");
     return (
         <div>
             <Dialog
